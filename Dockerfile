@@ -9,7 +9,7 @@ RUN apk add --no-cache libc6-compat
 # Copie des fichiers de dépendances
 COPY package*.json ./
 
-# Installation des dépendances avec un cache plus propre
+# Installation de toutes les dépendances (dev + prod)
 RUN npm ci
 
 # Copie du reste du code source
@@ -32,8 +32,8 @@ RUN apk add --no-cache libc6-compat
 # Copie des fichiers de dépendances
 COPY package*.json ./
 
-# Installation des dépendances de production uniquement
-RUN npm ci --only=production
+# Installation de toutes les dépendances (dev + prod) nécessaires pour le build
+RUN npm ci
 
 # Copie du reste du code source
 COPY . .
@@ -68,11 +68,6 @@ ENV PORT 3000
 
 # Exposition du port
 EXPOSE 3000
-
-# Commande pour démarrer l'application
-# Variables d'environnement pour la production
-ENV NODE_ENV=production
-ENV PORT=3000
 
 # Commande pour démarrer l'application
 CMD ["node", "server.js"] 
