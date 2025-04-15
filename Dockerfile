@@ -9,8 +9,8 @@ RUN apk add --no-cache libc6-compat
 # Copie des fichiers de dépendances
 COPY package*.json ./
 
-# Installation de toutes les dépendances (dev + prod)
-RUN npm ci
+# Installation de toutes les dépendances avec --legacy-peer-deps
+RUN npm ci --legacy-peer-deps
 
 # Copie du reste du code source
 COPY . .
@@ -32,8 +32,8 @@ RUN apk add --no-cache libc6-compat
 # Copie des fichiers de dépendances
 COPY package*.json ./
 
-# Installation de toutes les dépendances (dev + prod) nécessaires pour le build
-RUN npm ci
+# Installation de toutes les dépendances avec --legacy-peer-deps
+RUN npm ci --legacy-peer-deps
 
 # Copie du reste du code source
 COPY . .
